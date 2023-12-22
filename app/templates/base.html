@@ -6,7 +6,7 @@
     {% tailwind_css %}
   </head>
   <body class="bg-gray-900">
-    {% include "navbar.html" %}
+    {% if user.is_authenticated %} {% include "navbar.html" %}
     <main class="isolate">
       <div class="bg-gray-900 py-24 sm:py-32">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
@@ -16,5 +16,16 @@
         </div>
       </div>
     </main>
+    {% else %} {% block auth %}
+    <div id="auth">
+      <a href="{% url 'login' %}">Login</a>
+      <a
+        href="{% url 'register' %}"
+        class="shadow-sm text-sm font-semibold leading-6 text-white bg-indigo-600 rounded-md"
+      >
+        Register
+      </a>
+    </div>
+    {% endblock %} {% endif %}
   </body>
 </html>

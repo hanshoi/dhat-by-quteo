@@ -13,5 +13,5 @@ manage.py migrate   # run migrations
 ### run
 
 ```shell
-manage.py runserver  # start dev server
+manage.py tailwind runserver  # start dev server
 ```

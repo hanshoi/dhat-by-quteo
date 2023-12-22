@@ -5,28 +5,18 @@
     aria-label="Global"
   >
     <button
-      hx-get="{% url 'home' %}"
+      hx-get="{% url 'index' %}"
       hx-trigger="click"
       hx-target="#body"
       class="text-sm font-semibold leading-6 text-white"
     >
       Home
     </button>
-    <button
-      hx-get="{% url 'blogs' %}"
-      hx-trigger="click"
-      hx-target="#body"
+    <a
+      href="{% url 'logout' %}"
       class="text-sm font-semibold leading-6 text-white"
     >
-      Blog
-    </button>
-    <button
-      hx-get="{% url 'about' %}"
-      hx-trigger="click"
-      hx-target="#body"
-      class="text-sm font-semibold leading-6 text-white"
-    >
-      About
-    </button>
+      Logout
+    </a>
   </nav>
 </header>
