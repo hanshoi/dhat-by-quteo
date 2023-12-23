@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "quteo"
 authors = ["Antti Kaarnikka"]
 readme = "README.md"
-packages = [{ include = "quteo" }]
+packages = [{ include = "./*" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -22,8 +22,8 @@ pytest = "^7.4.3"
 isort = "^5.12.0"
 
 [tool.poetry.scripts]
-dev = "quteo.manage:runserver"
-m = "quteo.manage:main"
+dev = "manage:runserver"
+m = "manage:main"
 
 [build-system]
 requires = ["poetry-core"]
