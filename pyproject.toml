@@ -22,7 +22,8 @@ pytest = "^7.4.3"
 isort = "^5.12.0"
 
 [tool.poetry.scripts]
-dev = "quteo.manage:main"
+dev = "quteo.manage:runserver"
+m = "quteo.manage:main"
 
 [build-system]
 requires = ["poetry-core"]

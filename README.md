@@ -4,14 +4,16 @@ Quteo tool for internal use.
 
 ## Dev Env
 
+Notice you need to run these commands in `poetry` environment.
+
 ### setup
 
 ```shell
-manage.py migrate   # run migrations
+poetry run m migrate   # run migrations
 ```
 
 ### run
 
 ```shell
-manage.py tailwind runserver  # start dev server
+poetry run dev   # start dev server
 ```
