@@ -14,7 +14,7 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'password1', 'password2']
 
 
-def register(request):
+def view(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
