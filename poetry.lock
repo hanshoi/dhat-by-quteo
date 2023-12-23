@@ -197,6 +197,21 @@ django = ">=3.2"
 django-extensions = ["django-extensions (>=3.2.1,<4.0.0)", "werkzeug (>=3.0.0,<4.0.0)"]
 
 [[package]]
+name = "django-template-partials"
+version = "23.4"
+description = "django-template-partials"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+Django = "*"
+
+[package.extras]
+docs = ["Sphinx"]
+tests = ["coverage", "django_coverage_plugin"]
+
+[[package]]
 name = "frozenlist"
 version = "1.4.0"
 description = "A list-like structure which implements collections.abc.MutableSequence"
@@ -368,7 +383,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.11"
-content-hash = "794a06fb62008bf1fd09fc2a5087e13f435cafc46300a4cce8d4c90e8a71443c"
+content-hash = "0416ff4e432275ef3c0325a6b62b20ba57d30f26d658d13aba4630ab9a31cdef"
 
 [metadata.files]
 aiohttp = [
@@ -623,6 +638,10 @@ django-htmx = [
 django-tailwind-cli = [
     {file = "django_tailwind_cli-2.6.0-py3-none-any.whl", hash = "sha256:c62a4121ad1e09c530ae876aabf010281d5ea7122df286cafb6deb5a4ae1e68d"},
     {file = "django_tailwind_cli-2.6.0.tar.gz", hash = "sha256:81f072efe9199ecf3fffe20ca56b35492584b763b69885212e9ad305de6687b1"},
+]
+django-template-partials = [
+    {file = "django-template-partials-23.4.tar.gz", hash = "sha256:f762b0b7b2222462df0845f0556792640b769eb832eae218a0e7dadd4e5606cc"},
+    {file = "django_template_partials-23.4-py2.py3-none-any.whl", hash = "sha256:d83d9c2d2836be769919e9aaf394d5feb1ac86e1187083030398308070122fca"},
 ]
 frozenlist = [
     {file = "frozenlist-1.4.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:764226ceef3125e53ea2cb275000e309c0aa5464d43bd72abd661e27fffc26ab"},

@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 
 INSTALLED_APPS = [
     "accounts",
+    "template_partials",
     "crispy_forms",
     "crispy_tailwind",
     "django_htmx",
