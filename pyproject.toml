@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "quteo"
 authors = ["Antti Kaarnikka"]
 readme = "README.md"
-packages = [{ include = "app" }]
+packages = [{ include = "quteo" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -17,9 +17,12 @@ django-browser-reload = "^1.12.0"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.6.1"
-black = {extras = ["d"], version = "^23.10.1"}
+black = { extras = ["d"], version = "^23.10.1" }
 pytest = "^7.4.3"
 isort = "^5.12.0"
+
+[tool.poetry.scripts]
+dev = "quteo.manage:main"
 
 [build-system]
 requires = ["poetry-core"]
