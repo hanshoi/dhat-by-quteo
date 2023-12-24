@@ -1,10 +1,12 @@
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.template import Context, Template
 
 from accounts.models import User
 from django.contrib.auth.forms import UserCreationForm
+
+from .views import View, ViewContext
 
 
 class UserRegisterForm(UserCreationForm):
@@ -14,16 +16,13 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'password1', 'password2']
 
 
-def view(request):
-    if request.method == "POST":
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get("username")
-            messages.success(
-                request, f"Your account has been created! You are now able to log in"
-            )
-            return redirect("login")
-    else:
-        form = UserRegisterForm()
-        return render(request, "register.html", {"form": form})
+view = View(template="register.html")
+
+
+@view.post(form_class=UserRegisterForm)
+def _form_success(ctx: ViewContext) -> HttpResponse:
+        username = ctx.form.cleaned_data.get("username")
+        messages.success(
+            ctx.request, f"Your account has been created! You are now able to log in"
+        )
+        return redirect("login")
