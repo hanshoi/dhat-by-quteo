@@ -1,6 +1,6 @@
 import dataclasses
-from typing import Optional, Self
-from django.forms import Form
+from typing import Optional
+from django.forms import BaseForm, ModelForm
 
 from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import render
@@ -10,19 +10,21 @@ from django.shortcuts import render
 class ViewContext:
     template: str
     request: HttpRequest
-    form: Optional[Form] = None
+    form: BaseForm
 
 
 class View:
     def __init__(
-        self, template: Optional[str] = None, form_class: Optional[type[Form]] = None
+        self,
+        template: Optional[str] = None,
+        form_class: Optional[type[BaseForm]] = None,
     ):
         self.form_success_handler = None
         self.get_handler = None
         self.template = template
         self.form_class = form_class
 
-    def post(self, form_class: Optional[type[Form]] = None):
+    def post(self, form_class: Optional[type[BaseForm]] = None):
         self.form_class = form_class
 
         def inner(func):
@@ -48,7 +50,8 @@ class View:
                 if self.form_class is not None:
                     form = self.form_class(request.POST)
                     if form.is_valid():
-                        form.save()
+                        if isinstance(form, ModelForm):
+                            form.save()
                         if self.form_success_handler:
                             return self.form_success_handler(
                                 ViewContext(self.template, request, form)
