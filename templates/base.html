@@ -6,7 +6,9 @@
     <script src="{% static 'htmx.min.js' %}" defer></script>
     {% tailwind_css %}
   </head>
-  <body class="h-full" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <body class="h-full"
+        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+        id="body">
     {% block base %}
     {% endblock base %}
   </body>

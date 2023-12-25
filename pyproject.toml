@@ -40,6 +40,9 @@ django_settings_module = "app.settings"
 module = ["*.migrations", "*.settings", "*.tests"]
 ignore_missing_imports = true
 
+[tool.djlint]
+indent = 2
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

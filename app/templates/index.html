@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block base %}
   {% if user.is_authenticated %}
-    {% include "navbar.html" %}
-    <div class="py-24 sm:py-32">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl sm:text-center" id="body">
+    <div hx-boost="true" hx-target="#main">
+      {% include "sidebar.html" %}
+      <main class="py-10 lg:pl-72">
+        <div class="px-4 sm:px-6 lg:px-8" id="main">
           {% block main %}
           {% endblock main %}
         </div>
-      </div>
+      </main>
     </div>
   {% endif %}
 {% endblock base %}
