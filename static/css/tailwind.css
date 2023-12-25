@@ -908,20 +908,12 @@ select {
   width: 100%;
 }
 
-.w-8 {
-  width: 2rem;
-}
-
 .flex-1 {
   flex: 1 1 0%;
 }
 
 .shrink-0 {
   flex-shrink: 0;
-}
-
-.flex-grow {
-  flex-grow: 1;
 }
 
 .grow {
@@ -1012,10 +1004,6 @@ select {
 
 .rounded-md {
   border-radius: 0.375rem;
-}
-
-.rounded-full {
-  border-radius: 9999px;
 }
 
 .rounded-b {
@@ -1256,16 +1244,6 @@ select {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-gray-200 {
-  --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity));
-}
-
-.text-gray-300 {
-  --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
 .shadow-sm {
