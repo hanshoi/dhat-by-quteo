@@ -17,10 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.shortcuts import render
 from django.urls import include, path
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def index(request):
-    return render(request, "base.html")
+    return render(request, "index.html")
 
 
 urlpatterns = [

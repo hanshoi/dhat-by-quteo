@@ -1,19 +1,25 @@
-{% extends "base.html" %} {% block auth %}
-<div class="" id="login">
-  <form method="POST">
-    {% csrf_token %}
-    <fieldset class="">
-      <legend class="">LOG IN</legend>
-      {{ form.as_p }}
-    </fieldset>
-    <div class="">
-      <button class="" type="submit">Log In</button>
+{% extends "base.html" %}
+{% load static %}
+{% load tailwind_filters %}
+{% block base %}
+  <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+      <img class="mx-auto h-auto w-auto"
+           src="{% static 'logo.png' %}"
+           alt="Quteo">
+      <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
     </div>
-  </form>
-  <div class="">
-    <small class="">
-      Register Here <a class="" href="{% url 'register' %}">Sign Up</a>
-    </small>
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <form class="space-y-6" action="#" method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <div>
+          <button type="submit"
+                  class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            Sign in
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
-{% endblock %}
+{% endblock base %}

@@ -1,12 +1,13 @@
 <!-- Header -->
-<header class="bg-gray-900">
+<header>
   <nav class="mx-auto flex max-w-7xl justify-center p-6 lg:px-8 lg:gap-x-12"
        aria-label="Global">
     <button hx-get="{% url 'index' %}"
             hx-trigger="click"
             hx-target="#body"
             class="text-sm font-semibold leading-6 text-white">Home</button>
-    <a href="{% url 'logout' %}"
-       class="text-sm font-semibold leading-6 text-white">Logout</a>
+    <button hx-post="{% url 'logout' %}"
+            hx-trigger="click"
+            class="text-sm font-semibold leading-6 text-white">Logout</button>
   </nav>
 </header>
