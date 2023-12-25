@@ -19,12 +19,6 @@
     {% else %} {% block auth %}
     <div id="auth">
       <a href="{% url 'login' %}">Login</a>
-      <a
-        href="{% url 'register' %}"
-        class="shadow-sm text-sm font-semibold leading-6 text-white bg-indigo-600 rounded-md"
-      >
-        Register
-      </a>
     </div>
     {% endblock %} {% endif %}
   </body>

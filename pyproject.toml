@@ -22,6 +22,7 @@ mypy = "^1.6.1"
 black = { extras = ["d"], version = "^23.10.1" }
 pytest = "^7.4.3"
 isort = "^5.12.0"
+djlint = "^1.34.1"
 
 [tool.poetry.scripts]
 dev = "manage:runserver"

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% if user.is_authenticated %}
+  {% include "navbar.html" %}
+  <main class="isolate">
+    <div class="bg-gray-900 py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl sm:text-center" id="body">
+          {% block main %}{% endblock main %}
+        </div>
+      </div>
+    </div>
+  </main>
+{% else %}
+  {% block auth %}
+    <div id="auth">
+      <a href="{% url 'login' %}">Login</a>
+    </div>
+  {% endblock auth %}
+{% endif %}

@@ -1,7 +1,6 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from django.template import Context, Template
 
 from accounts.models import User
 from django.contrib.auth.forms import UserCreationForm
