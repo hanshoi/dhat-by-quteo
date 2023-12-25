@@ -8,7 +8,7 @@ packages = [{ include = "./*" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-Django = "^4.2.7"
+Django = "^5.0.0"
 django-htmx = "^1.17.0"
 django-tailwind-cli = "^2.6.0"
 django-crispy-forms = "^2.1"

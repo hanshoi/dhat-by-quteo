@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-f$-hkktx@=m0nipa+y_kk_1j)sne)6@jp59cvbim@1ki(%i_r+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # Application definition
@@ -90,7 +90,7 @@ DATABASES = {
 }
 
 
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = "accounts.User"
 LOGIN_REDIRECT_URL = "index"
 LOGIN_URL = "login"
 

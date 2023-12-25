@@ -10,10 +10,9 @@ from .views import View, ViewContext
 
 
 class UserRegisterForm(UserCreationForm):
-
     class Meta:
-        model= User
-        fields = ['username', 'password1', 'password2']
+        model = User
+        fields = ["username", "password1", "password2"]
 
 
 view = View(template="register.html")
@@ -21,8 +20,8 @@ view = View(template="register.html")
 
 @view.post(form_class=UserRegisterForm)
 def _form_success(ctx: ViewContext) -> HttpResponse:
-        username = ctx.form.cleaned_data.get("username")
-        messages.success(
-            ctx.request, f"Your account has been created! You are now able to log in"
-        )
-        return redirect("login")
+    username = ctx.form.cleaned_data.get("username")
+    messages.success(
+        ctx.request, f"Your account has been created! You are now able to log in"
+    )
+    return redirect("login")
