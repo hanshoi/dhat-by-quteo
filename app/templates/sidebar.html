@@ -9,11 +9,15 @@
     <nav class="flex flex-1 flex-col">
       <ul role="list" class="flex flex-1 flex-col gap-y-7">
         <li>
-          <ul role="list" class="-mx-2 space-y-1">
+          <ul role="list"
+              class="-mx-2 space-y-1"
+              x-data="{page: location.pathname.split('/')[1]}"
+              @hashchange.window="page = location.pathname.split('/')[1]">
             <li>
               <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
-              <a href="#"
-                 class="bg-gray-800 text-white group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+              <a href="{% url "index" %}"
+                 class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                 :class="page === '' ? 'text-white bg-gray-800' : ''">
                 <svg class="h-6 w-6 shrink-0"
                      fill="none"
                      viewBox="0 0 24 24"
@@ -25,10 +29,10 @@
                 Dashboard
               </a>
             </li>
-            <li x-data="{ open: false }">
-              <a href="#"
-                 @click="open = !open"
-                 class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+            <li>
+              <a href="{% url "team" %}"
+                 class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                 :class="page === 'team' ? 'text-white bg-gray-800' : ''">
                 <svg class="h-6 w-6 shrink-0"
                      fill="none"
                      viewBox="0 0 24 24"
@@ -39,7 +43,7 @@
                 </svg>
                 Team
               </a>
-              <ul x-show="open" class="ml-12">
+              <ul x-show="page === 'team'" class="ml-12">
                 <li>
                   <a href="#"
                      class="text-gray-500 hover:text-gray-300 hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">

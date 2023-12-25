@@ -27,6 +27,7 @@ def index(request):
 
 urlpatterns = [
     path("", index, name="index"),
+    path("team/", index, name="team"),
     path("auth/", include("accounts.urls")),
     path("admin/", admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
