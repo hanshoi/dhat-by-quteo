@@ -1,28 +1,24 @@
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
-from django.utils.html import format_html
 from django.contrib.auth.decorators import login_required
+
+
+def render_htmx(request, template: str, context: dict | None = None) -> HttpResponse:
+    if request.htmx:
+        return render(request, f"{template}#main", context or {})
+    else:
+        return render(request, template, context or {})
 
 
 @login_required
 def index(request):
-    return render(request, "index.html")
+    return render_htmx(request, "index.html")
 
 
 @login_required
 def content(request):
-    return HttpResponse(
-        format_html(
-            """
-<div class="overflow-hidden rounded-lg bg-gray-200">
-  <div class="px-4 py-5 sm:p-6">
-    <!-- Content goes here -->
-  </div>
-</div>
-    """
-        )
-    )
+    return render_htmx(request, "index.html")
 
 
 def _create_navigation(
@@ -30,11 +26,10 @@ def _create_navigation(
     icon: str,
     url_name: str,
     children: list[dict] | None = None,
-    active: bool = False,
 ) -> dict:
     return {
         "name": name,
-        "active": active,
+        "active": False,
         "icon": f"icons/{icon}.svg",
         "url": reverse(url_name),
         "sidebar_item": reverse("sidebar-item", args=[name.lower()]),
@@ -45,7 +40,7 @@ def _create_navigation(
 @login_required
 def sidebar(request, item=None):
     navigations = {
-        "dashboard": _create_navigation("Dashboard", "house", "index", active=True),
+        "dashboard": _create_navigation("Dashboard", "house", "index"),
         "team": _create_navigation(
             "Team",
             "people",
@@ -66,4 +61,23 @@ def sidebar(request, item=None):
             response.headers["HX-Trigger"] = "nav-link-deactivate"
         return response
     else:
+        key = _path_to_key(request.GET.get("url", "/"))
+        if key:
+            navigations[key]["active"] = True
         return render(request, "sidebar.html", {"navigations": navigations})
+
+
+def _path_to_key(path: str) -> str:
+    if path.startswith("/dashboard") or path == "/":
+        return "dashboard"
+    elif path.startswith("/team/"):
+        return "team"
+    elif path.startswith("/projects/"):
+        return "projects"
+    elif path.startswith("/calendar/"):
+        return "calendar"
+    elif path.startswith("/documents/"):
+        return "documents"
+    elif path.startswith("/reports/"):
+        return "reports"
+    return ""
