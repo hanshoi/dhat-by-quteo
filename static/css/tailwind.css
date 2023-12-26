@@ -852,6 +852,10 @@ select {
   display: block;
 }
 
+.inline {
+  display: inline;
+}
+
 .flex {
   display: flex;
 }
@@ -926,6 +930,10 @@ select {
 
 .table-auto {
   table-layout: auto;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .appearance-none {

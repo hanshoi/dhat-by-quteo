@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% block base %}
   {% if user.is_authenticated %}
-    <div hx-boost="true" hx-target="#main">
-      {% include "sidebar.html" %}
+    <div>
+      <div id="sidebar"
+           hx-get="{% url "sidebar" %}"
+           hx-trigger="load"
+           hx-target="#sidebar"></div>
       <main class="py-10 lg:pl-72">
         <div class="px-4 sm:px-6 lg:px-8" id="main">
           {% block main %}

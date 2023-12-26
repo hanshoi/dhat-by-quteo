@@ -17,17 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.shortcuts import render
 from django.urls import include, path
-from django.contrib.auth.decorators import login_required
-
-
-@login_required
-def index(request):
-    return render(request, "index.html")
+from . import views
 
 
 urlpatterns = [
-    path("", index, name="index"),
-    path("team/", index, name="team"),
+    path("", views.index, name="index"),
+    path("team/", views.content, name="team"),
+    path("dummy/", views.content, name="dummy"),
+    path("sidebar/", views.sidebar, name="sidebar"),
+    path("sidebar/<slug:item>/", views.sidebar, name="sidebar-item"),
     path("auth/", include("accounts.urls")),
     path("admin/", admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
