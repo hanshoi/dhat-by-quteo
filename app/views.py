@@ -73,7 +73,7 @@ def sidebar(request, item=None):
         return render(request, "sidebar.html", {"navigations": navigations})
 
 
-def _path_to_key(path: str, navigations: dict) -> str:
+def _path_to_key(path: str, navigations: dict) -> str | None:
     if path == "/":
         return "dashboard"
 
