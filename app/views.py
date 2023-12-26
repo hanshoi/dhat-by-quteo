@@ -26,32 +26,38 @@ def _create_navigation(
     icon: str,
     url_name: str,
     children: list[dict] | None = None,
-) -> dict:
-    return {
-        "name": name,
-        "active": False,
-        "icon": f"icons/{icon}.svg",
-        "url": reverse(url_name),
-        "sidebar_item": reverse("sidebar-item", args=[name.lower()]),
-        "children": children or [],
-    }
+) -> tuple[str, dict]:
+    key = name.lower()
+    return (
+        key,
+        {
+            "name": name,
+            "active": False,
+            "icon": f"icons/{icon}.svg",
+            "url": reverse(url_name),
+            "sidebar_item": reverse("sidebar-item", args=[key]),
+            "children": children or [],
+        },
+    )
 
 
 @login_required
 def sidebar(request, item=None):
-    navigations = {
-        "dashboard": _create_navigation("Dashboard", "house", "index"),
-        "team": _create_navigation(
-            "Team",
-            "people",
-            "team",
-            [{"name": "Prospects", "url": reverse("dummy")}],
-        ),
-        "projects": _create_navigation("Projects", "folder", "dummy"),
-        "calendar": _create_navigation("Calendar", "calendar", "dummy"),
-        "documents": _create_navigation("Documents", "documents", "dummy"),
-        "reports": _create_navigation("Reports", "pie", "dummy"),
-    }
+    navigations = dict(
+        [
+            _create_navigation("Dashboard", "house", "index"),
+            _create_navigation(
+                "Team",
+                "people",
+                "team",
+                [{"name": "Prospects", "url": reverse("dummy")}],
+            ),
+            _create_navigation("Projects", "folder", "dummy"),
+            _create_navigation("Calendar", "calendar", "dummy"),
+            _create_navigation("Documents", "documents", "dummy"),
+            _create_navigation("Reports", "pie", "dummy"),
+        ]
+    )
     if item:
         deactivation = request.GET.get("deactivate", "").lower() == "true"
         nav = navigations[item]
@@ -61,23 +67,16 @@ def sidebar(request, item=None):
             response.headers["HX-Trigger"] = "nav-link-deactivate"
         return response
     else:
-        key = _path_to_key(request.GET.get("url", "/"))
+        key = _path_to_key(request.GET.get("url", "/"), navigations)
         if key:
             navigations[key]["active"] = True
         return render(request, "sidebar.html", {"navigations": navigations})
 
 
-def _path_to_key(path: str) -> str:
-    if path.startswith("/dashboard") or path == "/":
+def _path_to_key(path: str, navigations: dict) -> str:
+    if path == "/":
         return "dashboard"
-    elif path.startswith("/team/"):
-        return "team"
-    elif path.startswith("/projects/"):
-        return "projects"
-    elif path.startswith("/calendar/"):
-        return "calendar"
-    elif path.startswith("/documents/"):
-        return "documents"
-    elif path.startswith("/reports/"):
-        return "reports"
-    return ""
+
+    for key, nav in navigations.items():
+        if path[:6] == nav["url"][:6]:
+            return key
