@@ -11,3 +11,8 @@ from tasks.models import Task
 def task_list(request):
     tasks = Task.objects.prefetch_related("tags").order_by("-created_at").all()[:30]
     return render_htmx(request, "task_list.html", {"tasks": tasks})
+
+
+@login_required
+def add_task(request):
+    return render(request, "slideover.html")
