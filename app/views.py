@@ -1,14 +1,9 @@
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-
-def render_htmx(request, template: str, context: dict | None = None) -> HttpResponse:
-    if request.htmx:
-        return render(request, f"{template}#main", context or {})
-    else:
-        return render(request, template, context or {})
+from qframe.shortcuts import render_htmx
 
 
 @login_required
@@ -52,7 +47,7 @@ def sidebar(request, item=None):
                 "team",
                 [{"name": "Prospects", "url": reverse("dummy")}],
             ),
-            _create_navigation("Projects", "folder", "dummy"),
+            _create_navigation("Tasks", "folder", "tasks:tasks"),
             _create_navigation("Calendar", "calendar", "dummy"),
             _create_navigation("Documents", "documents", "dummy"),
             _create_navigation("Reports", "pie", "dummy"),
@@ -64,7 +59,7 @@ def sidebar(request, item=None):
         nav["active"] = False if deactivation else True
         response = render(request, "sidebar.html#navitem", {"nav": nav, "key": item})
         if not deactivation:
-            response.headers["HX-Trigger"] = "nav-link-deactivate" # type: ignore
+            response.headers["HX-Trigger"] = "nav-link-deactivate"  # type: ignore
         return response
     else:
         key = _path_to_key(request.GET.get("url", "/"), navigations)

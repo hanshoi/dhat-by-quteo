@@ -26,8 +26,8 @@ urlpatterns = [
     path("dummy/", views.content, name="dummy"),
     path("sidebar/", views.sidebar, name="sidebar"),
     path("sidebar/<slug:item>/", views.sidebar, name="sidebar-item"),
-    path("auth/", include("accounts.urls")),
-    path("tasks/", include("tasks.urls")),
+    path("auth/", include(("accounts.urls", "accounts"))),
+    path("tasks/", include(("tasks.urls", "tasks"))),
     path("admin/", admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
 ]

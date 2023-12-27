@@ -5,7 +5,7 @@ from django.contrib import messages
 from accounts.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-from .views import View, ViewContext
+from ...qframe.views import View, ViewContext
 
 
 class UserRegisterForm(UserCreationForm):
