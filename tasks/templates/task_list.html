@@ -1,4 +1,5 @@
 {% extends base %}
+{% load partials %}
 {% block main %}
   <div class="px-4 sm:px-6 lg:px-8">
     <div class="sm:flex sm:items-center">
@@ -34,9 +35,10 @@
                 </th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="divide-y divide-gray-200" id="task-list">
               {% for task in tasks %}
-                <tr>
+                {% partialdef task inline=True %}
+                <tr class="task">
                   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ task.title }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ task.assignee | default_if_none:"" }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ task.tags.all | join:", " }}</td>
@@ -45,11 +47,12 @@
                     <a href="#" class="text-amber-400 hover:text-amber-600">Edit<span class="sr-only">, Lindsay Walton</span></a>
                   </td>
                 </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
+              {% endpartialdef %}
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+</div>
 {% endblock main %}

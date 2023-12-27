@@ -1,4 +1,5 @@
 from django import forms
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
@@ -20,4 +21,13 @@ class AddTaskForm(forms.ModelForm):
 
 @login_required
 def add_task(request):
+    if request.method == "POST":
+        form = AddTaskForm(request.POST)
+        if form.is_valid():
+            task = form.save()
+            response = render(request, "task_list.html#task", {"task": task})
+            response.headers["HX-Trigger"] = "refreshslideover"
+            response.headers["HX-Reswap"] = "afterbegin"
+            response.headers["HX-Retarget"] = "#task-list"
+            return response
     return render(request, "task.html", {"form": AddTaskForm()})
