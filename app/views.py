@@ -64,7 +64,7 @@ def sidebar(request, item=None):
         nav["active"] = False if deactivation else True
         response = render(request, "sidebar.html#navitem", {"nav": nav, "key": item})
         if not deactivation:
-            response.headers["HX-Trigger"] = "nav-link-deactivate"
+            response.headers["HX-Trigger"] = "nav-link-deactivate" # type: ignore
         return response
     else:
         key = _path_to_key(request.GET.get("url", "/"), navigations)
@@ -80,3 +80,4 @@ def _path_to_key(path: str, navigations: dict) -> str | None:
     for key, nav in navigations.items():
         if path[:6] == nav["url"][:6]:
             return key
+    return None
