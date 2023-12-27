@@ -7,5 +7,5 @@ from qframe.shortcuts import render_htmx
 
 
 @login_required
-def index(request):
-    return render_htmx(request, "index.html")
+def task_list(request):
+    return render_htmx(request, "task_list.html")
