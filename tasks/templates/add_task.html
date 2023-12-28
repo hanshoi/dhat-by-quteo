@@ -7,7 +7,7 @@
 {% block content %}
   <div hx-get="{% url "tasks:add" %}"
        hx-target="this"
-       hx-trigger="refreshslideover">
+       hx-trigger="refresh-slideover">
     {% partialdef form inline=True %}
     <form hx-post="{% url "tasks:add" %}"
           hx-swap="innerHTML"

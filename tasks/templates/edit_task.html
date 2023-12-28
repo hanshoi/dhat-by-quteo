@@ -1,0 +1,22 @@
+{% extends "slideover.html" %}
+{% load tailwind_filters %}
+{% load partials %}
+{% block title %}
+  Add Task
+{% endblock title %}
+{% block content %}
+  <div>
+    {% partialdef form inline=True %}
+    <form hx-post="{% url "tasks:edit" task_id=task.id %}"
+          hx-swap="innerHTML"
+          hx-target="#slideover">
+      {% csrf_token %}
+      {{ form | crispy }}
+      <button type="submit"
+              class="block rounded-md bg-amber-400 px-3 py-2 text-center text-sm font-semibold text-gray-800 shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600">
+        Save
+      </button>
+    </form>
+  {% endpartialdef %}
+</div>
+{% endblock content %}
