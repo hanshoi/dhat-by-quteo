@@ -55,13 +55,16 @@ def edit_task(request, task_id: int):
 
 
 @login_required
-@require_http_methods(["DELETE"])
+@require_http_methods(["DELETE", "GET"])
 def delete_task(request, task_id: int):
     task = get_object_or_404(Task, pk=task_id)
-    task.delete()
-    return (
-        HtmxResponse("")
-        .trigger("close-slideover")
-        .reswap(Swap.OUTER)
-        .retarget(f"#tasklist-item-{task_id}")
-    )
+    if request.method == "GET":
+        return render_htmx(request, "delete_task_confirmation.html", {"task": task})
+    else:
+        task.delete()
+        return (
+            HtmxResponse("")
+            .trigger("close-slideover, close-modal")
+            .reswap(Swap.OUTER)
+            .retarget(f"#tasklist-item-{task_id}")
+        )

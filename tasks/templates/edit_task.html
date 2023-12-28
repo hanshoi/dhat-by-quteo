@@ -13,8 +13,9 @@
       {% csrf_token %}
       {{ form | crispy }}
       <div class="flex justify-between mt-4">
-        <button hx-delete="{% url "tasks:delete" task_id=task.id %}"
-                hx-confirm="You are about to delete '{{ task.title }}', are you sure?"
+        <button hx-get="{% url "tasks:delete" task_id=task.id %}"
+                hx-target="#modal"
+                hx-swap="innerHTML"
                 class="block rounded-md bg-red-400 px-3 py-2 text-center text-sm font-semibold text-gray-800 shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
           Delete
         </button>
