@@ -1,9 +1,10 @@
 from django import forms
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
-from qframe.constants import ResponseHeaders, Swap
+from django.views.decorators.http import require_http_methods
 
+from qframe.constants import Swap
+from qframe.response import HtmxResponse
 from qframe.shortcuts import render_htmx, render_with_base
 from tasks.models import Task
 
@@ -50,4 +51,17 @@ def edit_task(request, task_id: int):
             )
     return render(
         request, "edit_task.html", {"form": TaskForm(instance=task), "task": task}
+    )
+
+
+@login_required
+@require_http_methods(["DELETE"])
+def delete_task(request, task_id: int):
+    task = get_object_or_404(Task, pk=task_id)
+    task.delete()
+    return (
+        HtmxResponse("")
+        .trigger("close-slideover")
+        .reswap(Swap.OUTER)
+        .retarget(f"#tasklist-item-{task_id}")
     )
