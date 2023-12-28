@@ -1,19 +1,17 @@
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from qframe.shortcuts import render_htmx
+from qframe.shortcuts import render_htmx, render_with_base
 
 
 @login_required
 def index(request):
-    return render_htmx(request, "index.html")
+    return render_with_base(request, "index.html")
 
 
 @login_required
 def content(request):
-    return render_htmx(request, "index.html")
+    return render_with_base(request, "index.html")
 
 
 def _create_navigation(
@@ -57,15 +55,17 @@ def sidebar(request, item=None):
         deactivation = request.GET.get("deactivate", "").lower() == "true"
         nav = navigations[item]
         nav["active"] = False if deactivation else True
-        response = render(request, "sidebar.html#navitem", {"nav": nav, "key": item})
+        response = render_htmx(
+            request, "sidebar.html#navitem", {"nav": nav, "key": item}
+        )
         if not deactivation:
-            response.headers["HX-Trigger"] = "nav-link-deactivate"  # type: ignore
+            response.trigger("nav-link-deactivate")
         return response
     else:
         key = _path_to_key(request.GET.get("url", "/"), navigations)
         if key:
             navigations[key]["active"] = True
-        return render(request, "sidebar.html", {"navigations": navigations})
+        return render_htmx(request, "sidebar.html", {"navigations": navigations})
 
 
 def _path_to_key(path: str, navigations: dict) -> str | None:
