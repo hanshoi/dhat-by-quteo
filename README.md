@@ -1,6 +1,6 @@
-# DAHT - Django + Alpinejs + HTMX + Tailwind example
+# DHAT - Django + HTMX + Alpinejs + Tailwind example
 
-Django + Alpinejs + HTMX + Tailwind example by Quteo.
+Django + HTMX + Alpinejs + Tailwind example by Quteo.
 
 ## Dev Env
 
