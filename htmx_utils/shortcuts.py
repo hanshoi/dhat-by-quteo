@@ -1,7 +1,7 @@
 from typing import Any
 from django.template import loader
 
-from qframe.response import HtmxResponse
+from htmx_utils.response import HtmxResponse
 
 
 def render_htmx(

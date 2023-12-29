@@ -1,6 +1,6 @@
-# Quteo
+# DAHT - Django + Alpinejs + HTMX + Tailwind example
 
-Quteo tool for internal use.
+Django + Alpinejs + HTMX + Tailwind example by Quteo.
 
 ## Dev Env
 
@@ -9,7 +9,8 @@ Notice you need to run these commands in `poetry` environment.
 ### setup
 
 ```shell
-poetry run m migrate   # run migrations
+poetry run python manage.py migrate   # run migrations
+poetry run python manage.py createsuperuser
 ```
 
 ### run

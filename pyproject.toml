@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "quteo"
+name = "dhat-example"
 version = "0.1.0"
 description = "quteo"
 authors = ["Antti Kaarnikka"]

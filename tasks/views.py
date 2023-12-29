@@ -3,9 +3,9 @@ from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 
-from qframe.constants import Swap
-from qframe.response import HtmxResponse
-from qframe.shortcuts import render_htmx, render_with_base
+from htmx_utils.constants import Swap
+from htmx_utils.response import HtmxResponse
+from htmx_utils.shortcuts import render_htmx, render_with_base
 from tasks.models import Task
 
 

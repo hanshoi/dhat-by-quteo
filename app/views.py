@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from qframe.shortcuts import render_htmx, render_with_base
+from htmx_utils.shortcuts import render_htmx, render_with_base
 
 
 @login_required

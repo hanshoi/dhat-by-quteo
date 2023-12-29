@@ -1,7 +1,7 @@
 from typing import Self
 from django.http import HttpResponse
 
-from qframe.constants import ResponseHeaders, Swap, TriggerType
+from htmx_utils.constants import ResponseHeaders, Swap, TriggerType
 
 
 class HtmxResponse(HttpResponse):
